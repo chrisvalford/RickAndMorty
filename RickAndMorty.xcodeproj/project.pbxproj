@@ -98,11 +98,12 @@
 		2F1E6FBA2A30F193009805EE /* RickAndMorty */ = {
 			isa = PBXGroup;
 			children = (
+				2F1E6FED2A30F34A009805EE /* Networking */,
+				2F1E6FEC2A30F342009805EE /* Extensions */,
+				2F1E6FEB2A30F33B009805EE /* Models */,
+				2F1E6FEA2A30F332009805EE /* Scenes */,
 				2F1E6FBB2A30F193009805EE /* RickAndMortyApp.swift */,
-				2F1E6FBD2A30F193009805EE /* ContentView.swift */,
 				2F1E6FBF2A30F196009805EE /* Assets.xcassets */,
-				2F1E6FC42A30F196009805EE /* Persistence.swift */,
-				2F1E6FC62A30F196009805EE /* RickAndMorty.xcdatamodeld */,
 				2F1E6FC12A30F196009805EE /* Preview Content */,
 			);
 			path = RickAndMorty;
@@ -131,6 +132,37 @@
 				2F1E6FDD2A30F196009805EE /* RickAndMortyUITestsLaunchTests.swift */,
 			);
 			path = RickAndMortyUITests;
+			sourceTree = "<group>";
+		};
+		2F1E6FEA2A30F332009805EE /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				2F1E6FBD2A30F193009805EE /* ContentView.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		2F1E6FEB2A30F33B009805EE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2F1E6FC42A30F196009805EE /* Persistence.swift */,
+				2F1E6FC62A30F196009805EE /* RickAndMorty.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2F1E6FEC2A30F342009805EE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2F1E6FED2A30F34A009805EE /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
