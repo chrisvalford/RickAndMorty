@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct EpisodeResults: Codable {
+public struct EpisodeResults: Codable {
   let info: Info
   let results: [Episode]
 }
 
-struct Episode: Codable {
+public struct Episode: Codable {
     let id: Int
     let name: String
-    let air_date: String
+    let airDate: String
     let episode: String
     let characters: [URL]
     let url: URL
-    let created: Date //"2017-11-10T12:56:33.798Z"
-  }
+    let created: Date
+}

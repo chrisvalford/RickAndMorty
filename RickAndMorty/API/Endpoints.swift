@@ -7,11 +7,7 @@
 
 import Foundation
 
-let basePath = "https://rickandmortyapi.com/api"
-
-enum ResultType: String {
-    case character, episode, location
-}
+public let basePath = "https://rickandmortyapi.com/api/"
 
 /*
  All GET requests
