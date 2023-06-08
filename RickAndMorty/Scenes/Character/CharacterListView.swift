@@ -14,12 +14,14 @@ struct CharacterListView: View {
     var body: some View {
         NavigationView {
             List(model.characters) { character in
-                CharacterListCell(character: character)
-                    .frame(height: 100)
-                    .listRowSeparator(.hidden)
-                    .onAppear {
-                        self.elementOnAppear(character)
-                    }
+                NavigationLink(destination: CharacterDetailView(character: character)) {
+                    CharacterListCell(character: character)
+                        .frame(height: 100)
+                        .listRowSeparator(.hidden)
+                        .onAppear {
+                            self.elementOnAppear(character)
+                        }
+                }
             }
             .frame(maxWidth: .infinity)
             .edgesIgnoringSafeArea(.horizontal)
