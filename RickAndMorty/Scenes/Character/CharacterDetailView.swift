@@ -14,62 +14,70 @@ struct CharacterDetailView: View {
 
     var detentButton: Button<Text> {
         if selectedDetent == .custom(TinyDetent.self) {
-            return Button("Show more") {
+            return Button {
                 selectedDetent = .medium
+            } label: {
+                Text("Show more")
+                    .font(.caption)
             }
         } else {
-            return Button("Show less") {
+            return Button {
                 selectedDetent = .custom(TinyDetent.self)
+            } label: {
+                Text("Show less")
+                    .font(.caption)
             }
         }
     }
     let character: Character
     
     var body: some View {
-        ZStack(alignment: .top) {
+        VStack {
             AsyncImage(url: character.image) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                    .frame(maxWidth: .infinity, alignment: .top)
                     .ignoresSafeArea(.all)
             } placeholder: {
                 ProgressView()
             }
-            Spacer()
-            VStack {
-                Button("View details") {
-                    showSheet.toggle()
+            .ignoresSafeArea(.all)
+            ScrollView(.vertical) {
+                Text(character.name)
+                    .font(.largeTitle)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                    .padding(.top, 8)
+                HStack {
+                    Text("Species:")
+                    Text(character.species)
+                        .font(.subheadline)
                 }
-            }
-            .sheet(isPresented: $showSheet) {
-                detentButton
-                    .presentationDetents(
-                        [.custom(TinyDetent.self), .medium],
-                        selection: $selectedDetent
-                    )
-                    .padding()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+                HStack {
+                    Text("Status:")
+                    Text(character.status.rawValue.capitalized)
+                        .font(.subheadline)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+                HStack {
+                    Text("Gender:")
+                    Text(character.gender.rawValue.capitalized)
+                        .font(.subheadline)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+                HStack {
+                    Text("Origin:")
+                    Text(character.origin.name)
+                        .font(.subheadline)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
                 VStack(alignment: .leading) {
-                    Text(character.name)
-                        .font(.largeTitle)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal)
-                        .padding(.top, 8)
-                    Spacer()
-                    HStack {
-                        Text("Species:")
-                        Text(character.species)
-                            .font(.subheadline)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal)
-                    HStack {
-                        Text("Status:")
-                        Text(character.status.rawValue.capitalized)
-                            .font(.subheadline)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal)
                     HStack {
                         Text("Appears in")
                         Text("\(character.episode.count) episodes")
@@ -77,10 +85,18 @@ struct CharacterDetailView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
-                    Spacer()
+                    EpisodeScrollview()
+                    HStack(alignment: .top) {
+                        Text("Location ")
+                            .font(.subheadline)
+                        Text("\(character.location.name)")
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+
                 }
-                .interactiveDismissDisabled()
             }
+//            Spacer()
         }
         .ignoresSafeArea(.all)
     }

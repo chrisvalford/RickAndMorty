@@ -25,6 +25,8 @@
 		2F1E6FFB2A31A53C009805EE /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E6FFA2A31A53C009805EE /* CharacterViewModel.swift */; };
 		2F1E70002A31D885009805EE /* CharacterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E6FFF2A31D885009805EE /* CharacterListView.swift */; };
 		2F1E70022A31D8C5009805EE /* CharacterListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E70012A31D8C5009805EE /* CharacterListCell.swift */; };
+		2F435D662A327207009BDF79 /* EpisodeScrollview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F435D652A327207009BDF79 /* EpisodeScrollview.swift */; };
+		2F435D6A2A327B1F009BDF79 /* EpisodeScrollviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F435D692A327B1F009BDF79 /* EpisodeScrollviewCell.swift */; };
 		2FDF6D052A323B1F00CCBE71 /* EpisodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6D042A323B1F00CCBE71 /* EpisodeViewModel.swift */; };
 		2FDF6D082A323B8700CCBE71 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6D072A323B8700CCBE71 /* LocationViewModel.swift */; };
 		2FDF6D0A2A323CE300CCBE71 /* CharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6D092A323CE300CCBE71 /* CharacterDetailView.swift */; };
@@ -70,6 +72,8 @@
 		2F1E6FFA2A31A53C009805EE /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 		2F1E6FFF2A31D885009805EE /* CharacterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListView.swift; sourceTree = "<group>"; };
 		2F1E70012A31D8C5009805EE /* CharacterListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListCell.swift; sourceTree = "<group>"; };
+		2F435D652A327207009BDF79 /* EpisodeScrollview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeScrollview.swift; sourceTree = "<group>"; };
+		2F435D692A327B1F009BDF79 /* EpisodeScrollviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeScrollviewCell.swift; sourceTree = "<group>"; };
 		2FDF6D042A323B1F00CCBE71 /* EpisodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewModel.swift; sourceTree = "<group>"; };
 		2FDF6D072A323B8700CCBE71 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		2FDF6D092A323CE300CCBE71 /* CharacterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailView.swift; sourceTree = "<group>"; };
@@ -224,6 +228,8 @@
 			isa = PBXGroup;
 			children = (
 				2FDF6D042A323B1F00CCBE71 /* EpisodeViewModel.swift */,
+				2F435D652A327207009BDF79 /* EpisodeScrollview.swift */,
+				2F435D692A327B1F009BDF79 /* EpisodeScrollviewCell.swift */,
 			);
 			path = Episode;
 			sourceTree = "<group>";
@@ -381,6 +387,8 @@
 				2F1E70022A31D8C5009805EE /* CharacterListCell.swift in Sources */,
 				2F1E6FF12A31006F009805EE /* CharacterModels.swift in Sources */,
 				2FDF6D082A323B8700CCBE71 /* LocationViewModel.swift in Sources */,
+				2F435D6A2A327B1F009BDF79 /* EpisodeScrollviewCell.swift in Sources */,
+				2F435D662A327207009BDF79 /* EpisodeScrollview.swift in Sources */,
 				2F1E6FF32A3100B8009805EE /* BaseModels.swift in Sources */,
 				2FDF6D0A2A323CE300CCBE71 /* CharacterDetailView.swift in Sources */,
 			);
@@ -548,6 +556,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -577,6 +586,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
