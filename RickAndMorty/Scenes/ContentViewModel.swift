@@ -15,6 +15,16 @@ class ContentViewModel: ObservableObject {
     @Published var locations: [Location] = []
     let api = API()
 
+    func isLastCharacter(_ id: Int) -> Bool {
+        if characters.isEmpty {
+            return true
+        }
+        if (characters.last! as Character).id == id {
+            return true
+        }
+        return false
+    }
+
     func fetchAllCharacters() async {
         do {
             try await api.all(resultType: ResultType.character)
@@ -22,9 +32,21 @@ class ContentViewModel: ObservableObject {
             print("---------------------------")
             print("Characters")
             print("---------------------------")
-            print("\(characters)")
+            print("\(api.charactersInfo)")
         } catch {
             print(error)
+        }
+    }
+
+    func fetchMoreCharacters() async {
+        if api.charactersInfo?.next != nil {
+            print("Fetching more")
+            do {
+                try await api.all(resultType: ResultType.character, url: api.charactersInfo?.next?.absoluteString)
+                characters.append(contentsOf: api.characters)
+            } catch {
+                print(error)
+            }
         }
     }
 
@@ -35,7 +57,7 @@ class ContentViewModel: ObservableObject {
             print("---------------------------")
             print("Episodes")
             print("---------------------------")
-            print("\(episodes)")
+            print("\(api.episodesInfo)")
         } catch {
             print(error)
         }
@@ -48,7 +70,7 @@ class ContentViewModel: ObservableObject {
             print("---------------------------")
             print("Locations")
             print("---------------------------")
-            print("\(locations)")
+            print("\(api.locationsInfo)")
         } catch {
             print(error)
         }
