@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CharacterListView: View {
 
-    @ObservedObject var model = ContentViewModel()
+    @ObservedObject var model = CharacterViewModel()
     
     var body: some View {
         NavigationView {
