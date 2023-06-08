@@ -27,41 +27,6 @@ class API {
         case invalidJSON
     }
 
-    //TODO: Check against device 12/24 Hr clock
-    private var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        formatter.locale = Locale(identifier: "en_US")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        return formatter
-    }
-
-    /*
-     * Fetch the data for the specified ResultType
-     */
-    private func data<T>(resultType: T, url: String? = nil) async throws -> Data {
-        var dataUrl: URL
-        if url != nil {
-            // A next or previous page url has been given
-            guard let pageUrl = URL(string: url ?? "") else {
-                throw APIError.invalidURL
-            }
-            dataUrl = pageUrl
-        } else {
-            guard let url = URL(string: basePath+(resultType as! ResultType).rawValue) else {
-                throw APIError.invalidURL
-            }
-            dataUrl = url
-        }
-        print("URL: \(dataUrl.absoluteString)")
-        let (data, response) = try await URLSession.shared.data(from: dataUrl)
-        let success = 200..<299 ~= (response as? HTTPURLResponse)?.statusCode ?? 0
-        if success == false {
-            throw APIError.invalidResponse
-        }
-        return data
-    }
-
     /*
      * Fetch all the decoded json records for the Result Type
      */
@@ -94,5 +59,48 @@ class API {
             print(error)
             throw APIError.invalidJSON
         }
+    }
+
+    // MARK: - Private
+    /*
+     * Fetch the data for the specified ResultType
+     */
+    private func data<T>(resultType: T, url: String? = nil) async throws -> Data {
+        var dataUrl: URL
+        if url != nil {
+            // A next or previous page url has been given
+            guard let pageUrl = URL(string: url ?? "") else {
+                throw APIError.invalidURL
+            }
+            dataUrl = pageUrl
+        } else {
+            guard let url = URL(string: basePath+(resultType as! ResultType).rawValue) else {
+                throw APIError.invalidURL
+            }
+            dataUrl = url
+        }
+        print("URL: \(dataUrl.absoluteString)")
+        let urlSession = URLSession(configuration: sessionConfiguration)
+        let (data, response) = try await urlSession.data(from: dataUrl)
+        let success = 200..<299 ~= (response as? HTTPURLResponse)?.statusCode ?? 0
+        if success == false {
+            throw APIError.invalidResponse
+        }
+        return data
+    }
+
+    //TODO: Check against device 12/24 Hr clock
+    private var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        return formatter
+    }
+
+    private var sessionConfiguration: URLSessionConfiguration {
+        let configuration = URLSessionConfiguration.default
+        configuration.requestCachePolicy = .returnCacheDataElseLoad
+        return configuration
     }
 }
