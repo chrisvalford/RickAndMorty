@@ -12,20 +12,24 @@ struct CharacterListView: View {
     @ObservedObject var model = ContentViewModel()
     
     var body: some View {
-        List(model.characters) { character in
-            CharacterListCell(character: character)
-                .frame(height: 100)
-                .listRowSeparator(.hidden)
-                .onAppear {
-                    self.elementOnAppear(character)
+        NavigationView {
+            List(model.characters) { character in
+                CharacterListCell(character: character)
+                    .frame(height: 100)
+                    .listRowSeparator(.hidden)
+                    .onAppear {
+                        self.elementOnAppear(character)
+                    }
+            }
+            .frame(maxWidth: .infinity)
+            .edgesIgnoringSafeArea(.horizontal)
+            .listStyle(PlainListStyle())
+
+            .navigationTitle("Characters")
+            .onAppear {
+                Task {
+                    await model.fetchAllCharacters()
                 }
-        }
-        .frame(maxWidth: .infinity)
-        .edgesIgnoringSafeArea(.horizontal)
-        .listStyle(PlainListStyle())
-        .onAppear {
-            Task {
-                await model.fetchAllCharacters()
             }
         }
     }

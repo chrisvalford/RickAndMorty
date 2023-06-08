@@ -28,11 +28,18 @@ class ContentViewModel: ObservableObject {
     func fetchAllCharacters() async {
         do {
             try await api.all(resultType: ResultType.character)
-            characters = api.characters
+            characters = api.characters.sorted {
+                if $0.episode.count !=  $1.episode.count {
+                    return $0.episode.count >  $1.episode.count
+                } else {
+                    return $0.name < $1.name
+                }
+            }
+
             print("---------------------------")
             print("Characters")
             print("---------------------------")
-            print("\(api.charactersInfo)")
+            print("\(String(describing: api.charactersInfo))")
         } catch {
             print(error)
         }
@@ -43,7 +50,14 @@ class ContentViewModel: ObservableObject {
             print("Fetching more")
             do {
                 try await api.all(resultType: ResultType.character, url: api.charactersInfo?.next?.absoluteString)
-                characters.append(contentsOf: api.characters)
+               characters.append(contentsOf: api.characters)
+//                characters.append(contentsOf: api.characters.sorted {
+//                    if $0.episode.count !=  $1.episode.count {
+//                        return $0.episode.count >  $1.episode.count
+//                    } else {
+//                        return $0.name < $1.name
+//                    }
+//                })
             } catch {
                 print(error)
             }
@@ -57,7 +71,7 @@ class ContentViewModel: ObservableObject {
             print("---------------------------")
             print("Episodes")
             print("---------------------------")
-            print("\(api.episodesInfo)")
+            print("\(String(describing: api.episodesInfo))")
         } catch {
             print(error)
         }
@@ -70,7 +84,7 @@ class ContentViewModel: ObservableObject {
             print("---------------------------")
             print("Locations")
             print("---------------------------")
-            print("\(api.locationsInfo)")
+            print("\(String(describing: api.locationsInfo))")
         } catch {
             print(error)
         }

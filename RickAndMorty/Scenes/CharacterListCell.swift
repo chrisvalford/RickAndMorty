@@ -31,6 +31,8 @@ struct CharacterListCell: View {
                     .font(.subheadline)
                 Text(character.status.rawValue.capitalized)
                     .font(.subheadline)
+                Text("Appears in \(character.episode.count) episodes")
+                    .font(.subheadline)
             }
         }
     }
