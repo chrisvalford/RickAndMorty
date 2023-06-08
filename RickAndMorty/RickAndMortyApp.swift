@@ -13,8 +13,9 @@ struct RickAndMortyApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            CharacterListView()
+            //ContentView()
+            //    .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
