@@ -101,6 +101,14 @@ struct CharacterDetailView: View {
 //            Spacer()
         }
         .ignoresSafeArea(.all)
+        .onAppear {
+            let ratingModel = RatingModel()
+            rating = ratingModel.getRating(forCharacterID: character.id)
+        }
+        .onDisappear {
+            let ratingModel = RatingModel()
+            ratingModel.set(rating: rating, forCharacterID: character.id)
+        }
     }
 }
 

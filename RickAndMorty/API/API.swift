@@ -59,7 +59,6 @@ class API {
                     let wrapped = try decoder.decode(EpisodeResults.self, from: data)
                     episodes = wrapped.results
                     episodesInfo = wrapped.info
-
                 }
 
             case .location:
