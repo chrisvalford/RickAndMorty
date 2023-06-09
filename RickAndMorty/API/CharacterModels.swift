@@ -55,7 +55,7 @@ public struct Character: Codable, Identifiable  {
     let origin: Origin
     let location: CharacterLocation
     let image: URL
-    let episode: [URL]
+    let episode: [URL] // FIXME: There is an issue that this may only be one URL and not an array!
     let url: URL
     let created: Date
 }

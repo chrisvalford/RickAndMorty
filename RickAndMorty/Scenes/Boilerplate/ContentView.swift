@@ -16,8 +16,6 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<Item>
 
-    @ObservedObject var model = ContentViewModel()
-
     var body: some View {
         NavigationView {
             List {
@@ -41,13 +39,6 @@ struct ContentView: View {
                 }
             }
             Text("Select an item")
-        }
-        .onAppear {
-            Task {
-                await model.fetchAllCharacters()
-                await model.fetchAllEpisodes()
-                await model.fetchAllLocations()
-            }
         }
     }
 
