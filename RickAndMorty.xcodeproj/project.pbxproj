@@ -29,6 +29,14 @@
 		2F435D6A2A327B1F009BDF79 /* EpisodeScrollviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F435D692A327B1F009BDF79 /* EpisodeScrollviewCell.swift */; };
 		2F435D6D2A332791009BDF79 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F435D6C2A332791009BDF79 /* RatingView.swift */; };
 		2F435D712A333100009BDF79 /* RatingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F435D702A333100009BDF79 /* RatingModel.swift */; };
+		2F435D722A333A52009BDF79 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E6FF82A31A1A3009805EE /* API.swift */; };
+		2F435D732A333A52009BDF79 /* CharacterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E6FF02A31006F009805EE /* CharacterModels.swift */; };
+		2F435D742A333A52009BDF79 /* BaseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E6FF22A3100B8009805EE /* BaseModels.swift */; };
+		2F435D752A333A52009BDF79 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E6FEE2A30FB9C009805EE /* Endpoints.swift */; };
+		2F435D762A333A52009BDF79 /* EpisodeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E6FF62A310229009805EE /* EpisodeModels.swift */; };
+		2F435D772A333A52009BDF79 /* LocationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E6FF42A31011E009805EE /* LocationModels.swift */; };
+		2F435D792A333A77009BDF79 /* EpisodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F435D782A333A77009BDF79 /* EpisodeTests.swift */; };
+		2F435D7A2A333B29009BDF79 /* EpisodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6D042A323B1F00CCBE71 /* EpisodeViewModel.swift */; };
 		2FDF6D052A323B1F00CCBE71 /* EpisodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6D042A323B1F00CCBE71 /* EpisodeViewModel.swift */; };
 		2FDF6D082A323B8700CCBE71 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6D072A323B8700CCBE71 /* LocationViewModel.swift */; };
 		2FDF6D0A2A323CE300CCBE71 /* CharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6D092A323CE300CCBE71 /* CharacterDetailView.swift */; };
@@ -78,6 +86,7 @@
 		2F435D692A327B1F009BDF79 /* EpisodeScrollviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeScrollviewCell.swift; sourceTree = "<group>"; };
 		2F435D6C2A332791009BDF79 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		2F435D702A333100009BDF79 /* RatingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingModel.swift; sourceTree = "<group>"; };
+		2F435D782A333A77009BDF79 /* EpisodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTests.swift; sourceTree = "<group>"; };
 		2FDF6D042A323B1F00CCBE71 /* EpisodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewModel.swift; sourceTree = "<group>"; };
 		2FDF6D072A323B8700CCBE71 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		2FDF6D092A323CE300CCBE71 /* CharacterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailView.swift; sourceTree = "<group>"; };
@@ -155,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				2F1E6FD12A30F196009805EE /* RickAndMortyTests.swift */,
+				2F435D782A333A77009BDF79 /* EpisodeTests.swift */,
 			);
 			path = RickAndMortyTests;
 			sourceTree = "<group>";
@@ -414,7 +424,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F435D722A333A52009BDF79 /* API.swift in Sources */,
+				2F435D792A333A77009BDF79 /* EpisodeTests.swift in Sources */,
+				2F435D762A333A52009BDF79 /* EpisodeModels.swift in Sources */,
 				2F1E6FD22A30F196009805EE /* RickAndMortyTests.swift in Sources */,
+				2F435D742A333A52009BDF79 /* BaseModels.swift in Sources */,
+				2F435D772A333A52009BDF79 /* LocationModels.swift in Sources */,
+				2F435D732A333A52009BDF79 /* CharacterModels.swift in Sources */,
+				2F435D7A2A333B29009BDF79 /* EpisodeViewModel.swift in Sources */,
+				2F435D752A333A52009BDF79 /* Endpoints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

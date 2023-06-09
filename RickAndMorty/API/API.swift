@@ -44,10 +44,16 @@ class API {
                 charactersInfo = wrapped.info
 
             case .episode:
-                if !url!.isEmpty {
+                guard let url = url else {
+                    let wrapped = try decoder.decode(EpisodeResults.self, from: data)
+                    episodes = wrapped.results
+                    episodesInfo = wrapped.info
+                    return
+                }
+                if !url.isEmpty {
                     // Have we asked for more than one episode?
-                    guard let components = url?.components(separatedBy: "/") else { return }
-                    guard let episodeList = components.last  else { return }
+                    let components = url.components(separatedBy: "/")
+                    guard let episodeList = components.last else { return }
                     if episodeList.contains(",") {
                         let wrapped = try decoder.decode([Episode].self, from: data)
                         episodes = wrapped
@@ -55,10 +61,6 @@ class API {
                         let wrapped = try decoder.decode(Episode.self, from: data)
                         episodes = [wrapped]
                     }
-                } else {
-                    let wrapped = try decoder.decode(EpisodeResults.self, from: data)
-                    episodes = wrapped.results
-                    episodesInfo = wrapped.info
                 }
 
             case .location:
