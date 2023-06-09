@@ -9,19 +9,22 @@ import SwiftUI
 
 struct EpisodeScrollviewCell: View {
 
-    var episode: String = ""
+    var episode: Episode
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(episode)
-            Text("airDate")
-            Text("episode")
+            Text(episode.name)
+                .font(.headline)
+            Text(episode.airDate)
+                .font(.subheadline)
+            Text(episode.episode)
+                .font(.subheadline)
         }
     }
 }
 
-struct EpisodeScrollviewCell_Previews: PreviewProvider {
-    static var previews: some View {
-        EpisodeScrollviewCell()
-    }
-}
+//struct EpisodeScrollviewCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EpisodeScrollviewCell()
+//    }
+//}

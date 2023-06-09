@@ -9,16 +9,19 @@ import SwiftUI
 
 struct EpisodeScrollview: View {
 
-    var episodes: [String] = ["One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Last"]
+    @State var model: EpisodeViewModel
+    @State var episodes: [Episode] = []
+
+    init(episodes: [URL]) {
+        model = EpisodeViewModel()
+        model.urls = episodes
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Episodes")
-                .font(.callout)
-                .padding(.top)
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
-                    ForEach(episodes, id: \.self) { episode in
+                    ForEach(episodes) { episode in
                         EpisodeScrollviewCell(episode: episode)
                             .padding()
                     }
@@ -28,11 +31,17 @@ struct EpisodeScrollview: View {
             .frame(maxWidth: .infinity)
         }
         .padding(.horizontal)
+        .onAppear {
+            Task {
+                await model.fetchAllEpisodes()
+                self.episodes = model.episodes
+            }
+        }
     }
 }
 
-struct EpisodeScrollview_Previews: PreviewProvider {
-    static var previews: some View {
-        EpisodeScrollview()
-    }
-}
+//struct EpisodeScrollview_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EpisodeScrollview()
+//    }
+//}

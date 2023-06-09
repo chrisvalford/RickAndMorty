@@ -85,7 +85,7 @@ struct CharacterDetailView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
-                    EpisodeScrollview()
+                    EpisodeScrollview(episodes: character.episode)
                     HStack(alignment: .top) {
                         Text("Location ")
                             .font(.subheadline)

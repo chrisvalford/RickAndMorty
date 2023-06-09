@@ -44,9 +44,10 @@ class API {
                 charactersInfo = wrapped.info
 
             case .episode:
-                let wrapped = try decoder.decode(EpisodeResults.self, from: data)
-                episodes = wrapped.results
-                episodesInfo = wrapped.info
+                let wrapped = try decoder.decode([Episode].self, from: data)
+                //episodes = wrapped.results
+                //episodesInfo = wrapped.info
+                episodes = wrapped
 
             case .location:
                 let wrapped = try decoder.decode(LocationResults.self, from: data)

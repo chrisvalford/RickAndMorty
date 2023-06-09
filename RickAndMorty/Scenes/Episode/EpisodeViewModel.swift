@@ -9,15 +9,36 @@ import Foundation
 
 class EpisodeViewModel: ObservableObject {
 
-    @Published var episodes: [Episode] = []
-    let api = API()
+    var urls: [URL] = []
+    private(set) var episodes: [Episode] = []
+    private let api = API()
+    private var episodeIDs: [String] = []
 
     func fetchAllEpisodes() async {
-        do {
-            try await api.all(resultType: ResultType.episode)
-            episodes = api.episodes
-        } catch {
-            print(error)
+        var path = "https://rickandmortyapi.com/api/episode/"
+        for url in urls {
+            episodeIDs.append(url.lastPathComponent)
+        }
+        if episodeIDs.isEmpty {
+            do {
+                try await api.all(resultType: ResultType.episode)
+                episodes = api.episodes
+            } catch {
+                print(error)
+            }
+        } else {
+            for id in episodeIDs {
+                path.append(id)
+                if id != episodeIDs.last {
+                    path.append(",")
+                }
+            }
+            do {
+                try await api.all(resultType: ResultType.episode, url: path)
+                episodes.append(contentsOf: api.episodes)
+            } catch {
+                print(error)
+            }
         }
     }
 }

@@ -12,8 +12,10 @@ public struct EpisodeResults: Codable {
   let results: [Episode]
 }
 
-public struct Episode: Codable {
-    let id: Int
+public struct Episode: Codable, Identifiable {
+    public var id: String {
+        return episode
+    }
     let name: String
     let airDate: String
     let episode: String
