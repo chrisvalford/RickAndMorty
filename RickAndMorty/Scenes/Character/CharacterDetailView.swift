@@ -11,6 +11,7 @@ struct CharacterDetailView: View {
 
     @State private var showSheet = true
     @State private var selectedDetent = PresentationDetent.custom(TinyDetent.self)
+    @State private var rating = 0
 
     var detentButton: Button<Text> {
         if selectedDetent == .custom(TinyDetent.self) {
@@ -49,6 +50,7 @@ struct CharacterDetailView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
                     .padding(.top, 8)
+                RatingView(rating: $rating)
                 HStack {
                     Text("Species:")
                     Text(character.species)
