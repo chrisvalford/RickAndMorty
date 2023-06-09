@@ -8,11 +8,9 @@
 import Foundation
 
 @MainActor
-class ContentViewModel: ObservableObject {
+class CharacterViewModel: ObservableObject {
 
     @Published var characters: [Character] = []
-    @Published var episodes: [Episode] = []
-    @Published var locations: [Location] = []
     let api = API()
 
     func isLastCharacter(_ id: Int) -> Bool {
@@ -35,11 +33,6 @@ class ContentViewModel: ObservableObject {
                     return $0.name < $1.name
                 }
             }
-
-            print("---------------------------")
-            print("Characters")
-            print("---------------------------")
-            print("\(String(describing: api.charactersInfo))")
         } catch {
             print(error)
         }
@@ -51,6 +44,8 @@ class ContentViewModel: ObservableObject {
             do {
                 try await api.all(resultType: ResultType.character, url: api.charactersInfo?.next?.absoluteString)
                characters.append(contentsOf: api.characters)
+
+// TODO: Fix the sorting else use CoreData
 //                characters.append(contentsOf: api.characters.sorted {
 //                    if $0.episode.count !=  $1.episode.count {
 //                        return $0.episode.count >  $1.episode.count
@@ -63,31 +58,4 @@ class ContentViewModel: ObservableObject {
             }
         }
     }
-
-    func fetchAllEpisodes() async {
-        do {
-            try await api.all(resultType: ResultType.episode)
-            episodes = api.episodes
-            print("---------------------------")
-            print("Episodes")
-            print("---------------------------")
-            print("\(String(describing: api.episodesInfo))")
-        } catch {
-            print(error)
-        }
-    }
-
-    func fetchAllLocations() async {
-        do {
-            try await api.all(resultType: ResultType.location)
-            locations = api.locations
-            print("---------------------------")
-            print("Locations")
-            print("---------------------------")
-            print("\(String(describing: api.locationsInfo))")
-        } catch {
-            print(error)
-        }
-    }
-
 }
