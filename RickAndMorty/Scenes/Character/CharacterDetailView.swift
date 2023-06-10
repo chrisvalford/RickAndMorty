@@ -6,44 +6,22 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CharacterDetailView: View {
 
-    @State private var showSheet = true
-    @State private var selectedDetent = PresentationDetent.custom(TinyDetent.self)
     @State private var rating = 0
-
-    var detentButton: Button<Text> {
-        if selectedDetent == .custom(TinyDetent.self) {
-            return Button {
-                selectedDetent = .medium
-            } label: {
-                Text("Show more")
-                    .font(.caption)
-            }
-        } else {
-            return Button {
-                selectedDetent = .custom(TinyDetent.self)
-            } label: {
-                Text("Show less")
-                    .font(.caption)
-            }
-        }
-    }
     let character: Character
     
     var body: some View {
         VStack {
-            AsyncImage(url: character.image) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: .infinity, alignment: .top)
-                    .ignoresSafeArea(.all)
-            } placeholder: {
-                ProgressView()
-            }
-            .ignoresSafeArea(.all)
+            KFImage.url(character.image)
+                .cancelOnDisappear(true)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: .infinity, alignment: .top)
+                .ignoresSafeArea(.all)
+
             ScrollView(.vertical) {
                 Text(character.name)
                     .font(.largeTitle)
@@ -98,7 +76,7 @@ struct CharacterDetailView: View {
 
                 }
             }
-//            Spacer()
+
         }
         .ignoresSafeArea(.all)
         .onAppear {
@@ -130,7 +108,6 @@ struct CharacterDetailView_Previews: PreviewProvider {
         CharacterDetailView(character: character)
     }
 }
-
 
 struct TinyDetent: CustomPresentationDetent {
     static func height(in context: Context) -> CGFloat? {
