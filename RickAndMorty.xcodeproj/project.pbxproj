@@ -29,6 +29,7 @@
 		2F435D6A2A327B1F009BDF79 /* EpisodeScrollviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F435D692A327B1F009BDF79 /* EpisodeScrollviewCell.swift */; };
 		2F435D6D2A332791009BDF79 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F435D6C2A332791009BDF79 /* RatingView.swift */; };
 		2F435D712A333100009BDF79 /* RatingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F435D702A333100009BDF79 /* RatingModel.swift */; };
+		2F7D27EF2A34EA7A003549D2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7D27EE2A34EA7A003549D2 /* Kingfisher */; };
 		2FDF6D052A323B1F00CCBE71 /* EpisodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6D042A323B1F00CCBE71 /* EpisodeViewModel.swift */; };
 		2FDF6D082A323B8700CCBE71 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6D072A323B8700CCBE71 /* LocationViewModel.swift */; };
 		2FDF6D0A2A323CE300CCBE71 /* CharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6D092A323CE300CCBE71 /* CharacterDetailView.swift */; };
@@ -89,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F7D27EF2A34EA7A003549D2 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +274,9 @@
 			dependencies = (
 			);
 			name = RickAndMorty;
+			packageProductDependencies = (
+				2F7D27EE2A34EA7A003549D2 /* Kingfisher */,
+			);
 			productName = RickAndMorty;
 			productReference = 2F1E6FB82A30F193009805EE /* RickAndMorty.app */;
 			productType = "com.apple.product-type.application";
@@ -344,6 +349,9 @@
 				Base,
 			);
 			mainGroup = 2F1E6FAF2A30F193009805EE;
+			packageReferences = (
+				2F7D27ED2A34EA7A003549D2 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 2F1E6FB92A30F193009805EE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -733,6 +741,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2F7D27ED2A34EA7A003549D2 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2F7D27EE2A34EA7A003549D2 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F7D27ED2A34EA7A003549D2 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		2F1E6FC62A30F196009805EE /* RickAndMorty.xcdatamodeld */ = {
