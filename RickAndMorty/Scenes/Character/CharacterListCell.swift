@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CharacterListCell: View {
 
@@ -13,16 +14,12 @@ struct CharacterListCell: View {
 
     var body: some View {
         HStack {
-            AsyncImage(url: character.image) { image in
-                image
-                    .resizable()
-                    .scaledToFill()
-            } placeholder: {
-                ProgressView()
-            }
-            .frame(width: 80, height: 80)
-            .background(Color.gray)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
+            KFImage.url(character.image)
+                .cancelOnDisappear(true)
+                .resizable()
+                .frame(width: 80, height: 80)
+                .background(Color.gray)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
 
             VStack(alignment: .leading) {
                 Text(character.name)
