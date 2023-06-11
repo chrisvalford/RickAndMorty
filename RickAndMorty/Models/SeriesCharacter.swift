@@ -9,19 +9,6 @@ import Foundation
 import CoreData
 
 class SeriesCharacter: NSManagedObject, Decodable {
-
-    //    public let id: Int
-    //    let name: String
-    //    let status: CharacterState
-    //    let species: String
-    //    let type: String
-    //    let gender: CharacterGender
-    //    let origin: Origin
-    //    let location: CharacterLocation
-    //    let image: URL
-    //    let episode: [URL]
-    //    let url: URL
-    //    let created: Date
     
     enum CodingKeys: CodingKey {
         case id, name, status, species, type, gender, origin, location, image, episode, url, created

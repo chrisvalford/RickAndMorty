@@ -12,12 +12,12 @@ struct RickAndMortyApp: App {
     let persistenceController = PersistenceController.shared
 
     init() {
-//        let api = API()
-//        api.clearData()
-//        let model = CharacterViewModel()
-//        Task {
-//            await model.fetchAllCharacters()
-//        }
+        let api = API()
+        api.clearData()
+        let model = CharacterViewModel()
+        Task {
+            await model.fetchAllCharacters()
+        }
     }
 
     var body: some Scene {

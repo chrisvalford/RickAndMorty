@@ -44,29 +44,3 @@ public struct CharacterResults: Decodable {
     let info: Info
     let results: [SeriesCharacter]
 }
-
-//public struct Character: Codable, Identifiable  {
-//    public let id: Int
-//    let name: String
-//    let status: CharacterState
-//    let species: String
-//    let type: String
-//    let gender: CharacterGender
-//    let origin: Origin
-//    let location: CharacterLocation
-//    let image: URL
-//    let episode: [URL]
-//    let url: URL
-//    let created: Date
-//}
-//
-//public struct Origin: Codable {
-//    let name: String
-//    let url: String
-//}
-//
-//public struct CharacterLocation: Codable {
-//    let name: String
-//    let url: String
-//}
-

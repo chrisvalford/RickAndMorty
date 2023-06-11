@@ -16,6 +16,7 @@ struct CharacterListView: View {
         animation: .default)
     private var characters: FetchedResults<SeriesCharacter>
 
+    @State private var isShowingSheet = false
     
     var body: some View {
         NavigationView {
@@ -31,6 +32,24 @@ struct CharacterListView: View {
             .listStyle(PlainListStyle())
 
             .navigationTitle("Characters")
+            .navigationBarItems(
+                trailing:
+                    Button(action: {
+                        isShowingSheet.toggle()
+                    }) {
+                        Image(systemName: "slider.vertical.3")
+                    }
+            )
+        }
+        .sheet(isPresented: $isShowingSheet) {
+            VStack(alignment: .leading) {
+                Text("Species")
+                Text("Status") // "Alive", "Dead", "Unknown"
+                Text("Gender") // "Unknown", "Male", "Female", "Genderless"
+                Text("Origin")
+                Text("Location")
+            }
+            .presentationDetents([.medium, .large])
         }
     }
 }
