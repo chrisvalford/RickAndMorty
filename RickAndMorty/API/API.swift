@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 public enum ResultType: String, Codable {
     case character, episode, location
@@ -13,7 +14,6 @@ public enum ResultType: String, Codable {
 
 class API {
 
-    var characters: [Character] = []
     var episodes: [Episode] = []
     var locations: [Location] = []
     var charactersInfo: Info?
@@ -25,6 +25,22 @@ class API {
         case invalidResponse
         case invalidData
         case invalidJSON
+        case coredataError
+    }
+
+    let moc = PersistenceController.shared.container.newBackgroundContext()
+
+    func clearData() {
+        let psc = PersistenceController.shared.container.persistentStoreCoordinator
+        let context = PersistenceController.shared.container.viewContext
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "SeriesCharacter")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try psc.execute(deleteRequest, with: context)
+        } catch {
+            print(error)
+        }
     }
 
     /*
@@ -34,13 +50,20 @@ class API {
         do {
             let data = try await data(resultType: resultType, url: url)
             let decoder = JSONDecoder()
+            guard let context = CodingUserInfoKey.context else {
+                print("Error fetching CodingUserInfoKey.context!")
+                throw APIError.coredataError
+            }
+
+            decoder.userInfo[context] = self.moc
             decoder.dateDecodingStrategy = .formatted(dateFormatter)
             decoder.keyDecodingStrategy = .convertFromSnakeCase
 
             switch resultType as? ResultType {
             case .character:
                 let wrapped = try decoder.decode(CharacterResults.self, from: data)
-                characters = wrapped.results
+                try self.moc.save()
+                //characters = wrapped.results
                 charactersInfo = wrapped.info
 
             case .episode:

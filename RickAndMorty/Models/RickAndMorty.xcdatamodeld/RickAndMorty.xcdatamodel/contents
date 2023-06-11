@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CharacterLocation" representedClassName=".CharacterLocation" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="toCharacter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SeriesCharacter" inverseName="toLocation" inverseEntity="SeriesCharacter"/>
+    </entity>
+    <entity name="CharacterOrigin" representedClassName=".CharacterOrigin" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="toCharacter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SeriesCharacter" inverseName="toOrigin" inverseEntity="SeriesCharacter"/>
+    </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
-    <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
-    </elements>
+    <entity name="SeriesCharacter" representedClassName=".SeriesCharacter" syncable="YES" codeGenerationType="category">
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="episode" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName=".[URL]"/>
+        <attribute name="gender" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="image" optional="YES" attributeType="URI"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="species" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="URI"/>
+        <relationship name="toLocation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CharacterLocation" inverseName="toCharacter" inverseEntity="CharacterLocation"/>
+        <relationship name="toOrigin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CharacterOrigin" inverseName="toCharacter" inverseEntity="CharacterOrigin"/>
+    </entity>
 </model>

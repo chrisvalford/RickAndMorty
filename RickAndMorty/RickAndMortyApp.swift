@@ -11,11 +11,19 @@ import SwiftUI
 struct RickAndMortyApp: App {
     let persistenceController = PersistenceController.shared
 
+    init() {
+//        let api = API()
+//        api.clearData()
+//        let model = CharacterViewModel()
+//        Task {
+//            await model.fetchAllCharacters()
+//        }
+    }
+
     var body: some Scene {
         WindowGroup {
             CharacterListView()
-            //ContentView()
-            //    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

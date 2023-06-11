@@ -9,18 +9,21 @@ import SwiftUI
 
 struct CharacterListView: View {
 
-    @ObservedObject var model = CharacterViewModel()
+    @Environment(\.managedObjectContext) private var viewContext
+
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \SeriesCharacter.name, ascending: true)],
+        animation: .default)
+    private var characters: FetchedResults<SeriesCharacter>
+
     
     var body: some View {
         NavigationView {
-            List(model.characters) { character in
+            List(characters) { character in
                 NavigationLink(destination: CharacterDetailView(character: character)) {
                     CharacterListCell(character: character)
                         .frame(height: 100)
                         .listRowSeparator(.hidden)
-                        .onAppear {
-                            self.elementOnAppear(character)
-                        }
                 }
             }
             .frame(maxWidth: .infinity)
@@ -28,19 +31,6 @@ struct CharacterListView: View {
             .listStyle(PlainListStyle())
 
             .navigationTitle("Characters")
-            .onAppear {
-                Task {
-                    await model.fetchAllCharacters()
-                }
-            }
-        }
-    }
-
-    private func elementOnAppear(_ character: Character) {
-        if model.isLastCharacter(character.id) {
-            Task {
-                await model.fetchMoreCharacters()
-            }
         }
     }
 }
