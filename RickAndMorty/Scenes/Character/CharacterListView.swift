@@ -18,21 +18,39 @@ struct CharacterListView: View {
 
     @State private var searchText = ""
     @State private var sortAscending = true
+    @State private var showWithRatingsOnly = false
+    @State private var characterIDs: [Int32] = []
+
+    private func updateCharacterIds(clear: Bool) {
+        if clear == false {
+            let model = RatingModel()
+            let ids =  model.charactersWithRating()
+            characterIDs = ids
+        } else {
+            characterIDs.removeAll()
+        }
+    }
     
     var body: some View {
         NavigationStack {
-            CharacterFilteredList(filter: searchText, sortAscending: sortAscending)
-                .navigationTitle("Characters")
-                .navigationBarItems(
-                    trailing:
-                        Button(action: {
-                            sortAscending.toggle()
-                        }) {
-                            Image(systemName: "arrow.up.arrow.down")
-                        }
-                )
+            CharacterFilteredList(filter: searchText, characterIDs: characterIDs, sortAscending: sortAscending)
+            .navigationTitle("Characters")
+            .searchable(text: $searchText, prompt: "Filter characters")
+            .toolbar {
+                Button {
+                    showWithRatingsOnly.toggle()
+                    if showWithRatingsOnly == true {
+                        updateCharacterIds(clear: false)
+                    } else {
+                        updateCharacterIds(clear: true)
+                    }
+                } label: { Image(systemName: showWithRatingsOnly ? "star.fill" : "star") }
+
+                Button {
+                    sortAscending.toggle()
+                } label: { Image(systemName: "arrow.up.arrow.down") }
+            }
         }
-        .searchable(text: $searchText, prompt: "Filter characters")
     }
 }
 

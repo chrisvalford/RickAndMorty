@@ -38,6 +38,21 @@ struct RatingModel {
         }
     }
 
+    func charactersWithRating() -> [Int32] {
+        let request = NSFetchRequest<CharacterRating>(entityName: "CharacterRating")
+        do {
+            let results = try moc.fetch(request)
+            var characterIDs: [Int32] = []
+            for result in results {
+                characterIDs.append(result.id)
+            }
+            return characterIDs
+        } catch {
+            print(error)
+        }
+        return []
+    }
+
     private func getCharacterRating(forCharacterID: Int) -> CharacterRating? {
         let request = NSFetchRequest<CharacterRating>(entityName: "CharacterRating")
         request.predicate = NSPredicate(format: "id == %d", forCharacterID)
