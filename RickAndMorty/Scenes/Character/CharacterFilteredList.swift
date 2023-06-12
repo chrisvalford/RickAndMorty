@@ -13,7 +13,7 @@ struct CharacterFilteredList: View {
 
     init(filter: String, sortAscending: Bool) {
         let sortDescriptor = SortDescriptor(\SeriesCharacter.name, order: sortAscending ? .forward : .reverse)
-        let predicate = filter.isEmpty ? NSPredicate(format: "name LIKE %@", "*") : NSPredicate(format: "name CONTAINS %@", filter)
+        let predicate = filter.isEmpty ? NSPredicate(format: "name LIKE %@", "*") : NSPredicate(format: "name CONTAINS[cd] %@", filter)
         _fetchRequest = FetchRequest<SeriesCharacter>(sortDescriptors: [sortDescriptor],
                                                       predicate: predicate)
     }

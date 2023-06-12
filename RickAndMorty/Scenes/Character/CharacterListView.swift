@@ -21,7 +21,7 @@ struct CharacterListView: View {
     @State private var sortAscending = true
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             CharacterFilteredList(filter: searchText, sortAscending: sortAscending)
                 .navigationTitle("Characters")
                 .navigationBarItems(
