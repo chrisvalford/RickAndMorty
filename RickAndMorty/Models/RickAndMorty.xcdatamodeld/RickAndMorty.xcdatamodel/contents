@@ -27,4 +27,12 @@
         <relationship name="toLocation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CharacterLocation" inverseName="toCharacter" inverseEntity="CharacterLocation"/>
         <relationship name="toOrigin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CharacterOrigin" inverseName="toCharacter" inverseEntity="CharacterOrigin"/>
     </entity>
+    <entity name="SeriesEpisode" representedClassName=".SeriesEpisode" syncable="YES" codeGenerationType="category">
+        <attribute name="airDate" attributeType="String"/>
+        <attribute name="characters" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName=".[URL]"/>
+        <attribute name="created" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="episode" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="url" attributeType="URI"/>
+    </entity>
 </model>

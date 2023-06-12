@@ -9,39 +9,26 @@ import SwiftUI
 
 struct EpisodeScrollview: View {
 
-    @State var model: EpisodeViewModel
-    @State var episodes: [Episode] = []
+    @Environment(\.managedObjectContext) private var viewContext
 
-    init(episodes: [URL]) {
-        model = EpisodeViewModel()
-        model.urls = episodes
-    }
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \SeriesEpisode.name, ascending: true)],
+        animation: .default)
+    private var episodes: FetchedResults<SeriesEpisode>
+
+    var urls: [URL] = []
+    @State var ids: [Int] = []
+    let api = API()
     
     var body: some View {
         VStack(alignment: .leading) {
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack {
-                    ForEach(episodes) { episode in
-                        EpisodeScrollviewCell(episode: episode)
-                            .padding()
-                    }
-                }
-            }
-            .frame(height: 80)
-            .frame(maxWidth: .infinity)
+            EpisodeFilteredList(episodes: FetchRequest(sortDescriptors: [], predicate: NSPredicate(format: "url IN %@", urls)))
         }
         .padding(.horizontal)
         .onAppear {
             Task {
-                await model.fetchAllEpisodes()
-                self.episodes = model.episodes
+                await api.fetchEpisodes(urls: urls)
             }
         }
     }
 }
-
-//struct EpisodeScrollview_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EpisodeScrollview()
-//    }
-//}

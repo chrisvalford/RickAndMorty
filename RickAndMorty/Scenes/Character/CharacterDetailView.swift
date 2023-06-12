@@ -65,7 +65,7 @@ struct CharacterDetailView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
-                    EpisodeScrollview(episodes: character.episode!)
+                    EpisodeScrollview(urls: character.episode!)
                     HStack(alignment: .top) {
                         Text("Location ")
                             .font(.subheadline)
@@ -73,7 +73,6 @@ struct CharacterDetailView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
-
                 }
             }
 
@@ -89,22 +88,3 @@ struct CharacterDetailView: View {
         }
     }
 }
-
-//struct CharacterDetailView_Previews: PreviewProvider {
-//
-//    static let character = Character(id: 99,
-//                                     name: "Nardole",
-//                                     status: .alive,
-//                                     species: "Almost human",
-//                                     type: "Unknown",
-//                                     gender: .unknown,
-//                                     origin: Origin(name: "Bognor Regis", url: "https://en.wikipedia.org/wiki/Bognor_Regis"), location: CharacterLocation(name: "Milton Keynes", url: "https://en.wikipedia.org/wiki/Milton_Keynes"),
-//                                     image: URL(string: "https://ichef.bbci.co.uk/images/ic/1008xn/p04zmzxv.jpg")!,
-//                                     episode: [],
-//                                     url: URL(string: "https://www.bbc.co.uk/programmes/m0016lkw")!,
-//                                     created: Date.now)
-//
-//    static var previews: some View {
-//        CharacterDetailView(character: character)
-//    }
-//}
