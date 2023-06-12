@@ -17,30 +17,22 @@ struct CharacterListView: View {
     private var characters: FetchedResults<SeriesCharacter>
 
     @State private var isShowingSheet = false
+    @State private var searchText = ""
     
     var body: some View {
         NavigationView {
-            List(characters) { character in
-                NavigationLink(destination: CharacterDetailView(character: character)) {
-                    CharacterListCell(character: character)
-                        .frame(height: 100)
-                        .listRowSeparator(.hidden)
-                }
-            }
-            .frame(maxWidth: .infinity)
-            .edgesIgnoringSafeArea(.horizontal)
-            .listStyle(PlainListStyle())
-
-            .navigationTitle("Characters")
-            .navigationBarItems(
-                trailing:
-                    Button(action: {
-                        isShowingSheet.toggle()
-                    }) {
-                        Image(systemName: "slider.vertical.3")
-                    }
-            )
+            CharacterFilteredList(filter: searchText)
+                .navigationTitle("Characters")
+                .navigationBarItems(
+                    trailing:
+                        Button(action: {
+                            isShowingSheet.toggle()
+                        }) {
+                            Image(systemName: "slider.vertical.3")
+                        }
+                )
         }
+        .searchable(text: $searchText, prompt: "Filter characters")
         .sheet(isPresented: $isShowingSheet) {
             VStack(alignment: .leading) {
                 Text("Species")
