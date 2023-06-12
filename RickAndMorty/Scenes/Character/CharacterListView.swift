@@ -18,19 +18,20 @@ struct CharacterListView: View {
 
 //    @State private var isShowingSheet = false
     @State private var searchText = ""
+    @State private var sortAscending = true
     
     var body: some View {
         NavigationView {
-            CharacterFilteredList(filter: searchText)
+            CharacterFilteredList(filter: searchText, sortAscending: sortAscending)
                 .navigationTitle("Characters")
-//                .navigationBarItems(
-//                    trailing:
-//                        Button(action: {
-//                            isShowingSheet.toggle()
-//                        }) {
-//                            Image(systemName: "slider.vertical.3")
-//                        }
-//                )
+                .navigationBarItems(
+                    trailing:
+                        Button(action: {
+                            sortAscending.toggle()
+                        }) {
+                            Image(systemName: "arrow.up.arrow.down")
+                        }
+                )
         }
         .searchable(text: $searchText, prompt: "Filter characters")
 //        .sheet(isPresented: $isShowingSheet) {

@@ -11,8 +11,11 @@ struct CharacterFilteredList: View {
 
     @FetchRequest var fetchRequest: FetchedResults<SeriesCharacter>
 
-    init(filter: String) {
-        _fetchRequest = FetchRequest<SeriesCharacter>(sortDescriptors: [], predicate: filter.isEmpty ? NSPredicate(format: "name LIKE %@", "*") : NSPredicate(format: "name CONTAINS %@", filter))
+    init(filter: String, sortAscending: Bool) {
+        let sortDescriptor = SortDescriptor(\SeriesCharacter.name, order: sortAscending ? .forward : .reverse)
+        let predicate = filter.isEmpty ? NSPredicate(format: "name LIKE %@", "*") : NSPredicate(format: "name CONTAINS %@", filter)
+        _fetchRequest = FetchRequest<SeriesCharacter>(sortDescriptors: [sortDescriptor],
+                                                      predicate: predicate)
     }
 
     var body: some View {
@@ -31,6 +34,6 @@ struct CharacterFilteredList: View {
 
 struct CharacterFilteredList_Previews: PreviewProvider {
     static var previews: some View {
-        CharacterFilteredList(filter: "Rick")
+        CharacterFilteredList(filter: "Rick", sortAscending: true)
     }
 }
