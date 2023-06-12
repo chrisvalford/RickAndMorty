@@ -24,6 +24,11 @@ struct RickAndMortyApp: App {
         WindowGroup {
             CharacterListView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .onAppear {
+                    UINavigationBar.appearance().backIndicatorImage = UIImage(systemName: "arrow.backward.circle")
+                    UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.backward.circle")
+
+                }
         }
     }
 }
