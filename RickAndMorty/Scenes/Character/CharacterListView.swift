@@ -16,33 +16,33 @@ struct CharacterListView: View {
         animation: .default)
     private var characters: FetchedResults<SeriesCharacter>
 
-    @State private var isShowingSheet = false
+//    @State private var isShowingSheet = false
     @State private var searchText = ""
     
     var body: some View {
         NavigationView {
             CharacterFilteredList(filter: searchText)
                 .navigationTitle("Characters")
-                .navigationBarItems(
-                    trailing:
-                        Button(action: {
-                            isShowingSheet.toggle()
-                        }) {
-                            Image(systemName: "slider.vertical.3")
-                        }
-                )
+//                .navigationBarItems(
+//                    trailing:
+//                        Button(action: {
+//                            isShowingSheet.toggle()
+//                        }) {
+//                            Image(systemName: "slider.vertical.3")
+//                        }
+//                )
         }
         .searchable(text: $searchText, prompt: "Filter characters")
-        .sheet(isPresented: $isShowingSheet) {
-            VStack(alignment: .leading) {
-                Text("Species")
-                Text("Status") // "Alive", "Dead", "Unknown"
-                Text("Gender") // "Unknown", "Male", "Female", "Genderless"
-                Text("Origin")
-                Text("Location")
-            }
-            .presentationDetents([.medium, .large])
-        }
+//        .sheet(isPresented: $isShowingSheet) {
+//            VStack(alignment: .leading) {
+//                Text("Species")
+//                Text("Status") // "Alive", "Dead", "Unknown"
+//                Text("Gender") // "Unknown", "Male", "Female", "Genderless"
+//                Text("Origin")
+//                Text("Location")
+//            }
+//            .presentationDetents([.medium, .large])
+//        }
     }
 }
 
