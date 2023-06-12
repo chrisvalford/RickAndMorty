@@ -1,7 +1,7 @@
 # RickAndMorty
 Sample Rick and Morty App built in SwiftUI
 
-![Icon](RickAndMorty/Assets.xcassets/AppIconset/AppIcon.png)
+![Icon](RickAndMorty/Assets.xcassets/AppIcon.appiconset/AppIcon.png)
 
 ### Branches
 The "main" branch currently does not use CoreData for the Rick and Morty characters.
