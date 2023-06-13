@@ -7,19 +7,7 @@
 
 import Foundation
 
-public struct EpisodeResults: Codable {
+public struct EpisodeResults: Decodable {
   let info: Info
-  let results: [Episode]
-}
-
-public struct Episode: Codable, Identifiable {
-    public var id: String {
-        return episode
-    }
-    let name: String
-    let airDate: String
-    let episode: String
-    let characters: [URL]
-    let url: URL
-    let created: Date
+  let results: [SeriesEpisode]
 }

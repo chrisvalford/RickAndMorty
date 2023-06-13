@@ -6,28 +6,62 @@
 //
 
 import Foundation
+import CoreData
 
-// TODO: Using the old user defaults, migrate to CoreData
 struct RatingModel {
 
-    let userDefaults = UserDefaults.standard
+    let moc = PersistenceController.shared.container.newBackgroundContext()
+
+    func getRating(forCharacterID: Int) -> Int {
+        guard let rating = getCharacterRating(forCharacterID: forCharacterID) else { return 0 }
+        return Int(rating.rating)
+    }
 
     func set(rating: Int, forCharacterID: Int) {
-        let key = String(format: "CharacterID%d", forCharacterID)
-        if let _ = userDefaults.value(forKey: key) {
-            // Update or, remove if rating is zero
+        let foundRating = getCharacterRating(forCharacterID: forCharacterID)
+        if foundRating != nil {
             if rating == 0 {
-                userDefaults.removeObject(forKey: key)
+                moc.delete(foundRating!)
             } else {
-                userDefaults.set(rating, forKey: key)
+                foundRating?.rating = Int16(rating)
             }
         } else {
-            userDefaults.set(rating, forKey: key)
+            let newRating = CharacterRating(context: moc)
+            newRating.id = Int32(forCharacterID)
+            newRating.rating = Int16(rating)
+        }
+
+        do {
+            try moc.save()
+        } catch {
+            print(error)
         }
     }
 
-    func getRating(forCharacterID: Int) -> Int {
-        let key = String(format: "CharacterID%d", forCharacterID)
-        return userDefaults.integer(forKey: key)
+    func charactersWithRating() -> [Int32] {
+        let request = NSFetchRequest<CharacterRating>(entityName: "CharacterRating")
+        do {
+            let results = try moc.fetch(request)
+            var characterIDs: [Int32] = []
+            for result in results {
+                characterIDs.append(result.id)
+            }
+            return characterIDs
+        } catch {
+            print(error)
+        }
+        return []
+    }
+
+    private func getCharacterRating(forCharacterID: Int) -> CharacterRating? {
+        let request = NSFetchRequest<CharacterRating>(entityName: "CharacterRating")
+        request.predicate = NSPredicate(format: "id == %d", forCharacterID)
+        do {
+            let result = try moc.fetch(request).first
+            return result
+        } catch {
+            print(error)
+            return nil
+        }
     }
 }

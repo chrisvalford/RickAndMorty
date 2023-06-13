@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CharacterLocation" representedClassName=".CharacterLocation" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="toCharacter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SeriesCharacter" inverseName="toLocation" inverseEntity="SeriesCharacter"/>
     </entity>
-    <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
-    </elements>
+    <entity name="CharacterOrigin" representedClassName=".CharacterOrigin" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="toCharacter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SeriesCharacter" inverseName="toOrigin" inverseEntity="SeriesCharacter"/>
+    </entity>
+    <entity name="CharacterRating" representedClassName="CharacterRating" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rating" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="SeriesCharacter" representedClassName=".SeriesCharacter" syncable="YES" codeGenerationType="category">
+        <attribute name="created" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="episode" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName=".[URL]"/>
+        <attribute name="gender" attributeType="String"/>
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="image" attributeType="URI"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="species" attributeType="String"/>
+        <attribute name="status" attributeType="String"/>
+        <attribute name="type" attributeType="String"/>
+        <attribute name="url" attributeType="URI"/>
+        <relationship name="toLocation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CharacterLocation" inverseName="toCharacter" inverseEntity="CharacterLocation"/>
+        <relationship name="toOrigin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CharacterOrigin" inverseName="toCharacter" inverseEntity="CharacterOrigin"/>
+    </entity>
+    <entity name="SeriesEpisode" representedClassName=".SeriesEpisode" syncable="YES" codeGenerationType="category">
+        <attribute name="airDate" attributeType="String"/>
+        <attribute name="characters" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName=".[URL]"/>
+        <attribute name="created" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="episode" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="url" attributeType="URI"/>
+    </entity>
 </model>
