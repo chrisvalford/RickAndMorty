@@ -11,4 +11,3 @@ Plau as the results are not complete, a search facility has not been added.
 The feature branch "007_switch_to_coredata" downloads all the records so has search and sort facilities.
 
 The coredata branch has been created to test the switch over to the new <a href="https://developer.apple.com/xcode/swiftdata/" target="_blank">SwiftData</a> framework in iOS17, so shouldn't be considered complete in any way.
-
