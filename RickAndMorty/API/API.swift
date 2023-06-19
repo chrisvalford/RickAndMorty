@@ -182,7 +182,8 @@ class API {
         do {
             let results = try moc.fetch(request)
             for result in results {
-                foundUrls.append(result.url!)
+                guard let url = result.url else { continue }
+                foundUrls.append(url)
             }
         } catch {
             print(error)
