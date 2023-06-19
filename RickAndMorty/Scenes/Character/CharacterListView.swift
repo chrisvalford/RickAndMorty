@@ -9,37 +9,46 @@ import SwiftUI
 
 struct CharacterListView: View {
 
-    @ObservedObject var model = CharacterViewModel()
-    
-    var body: some View {
-        NavigationView {
-            List(model.characters) { character in
-                NavigationLink(destination: CharacterDetailView(character: character)) {
-                    CharacterListCell(character: character)
-                        .frame(height: 100)
-                        .listRowSeparator(.hidden)
-                        .onAppear {
-                            self.elementOnAppear(character)
-                        }
-                }
-            }
-            .frame(maxWidth: .infinity)
-            .edgesIgnoringSafeArea(.horizontal)
-            .listStyle(PlainListStyle())
+    @Environment(\.managedObjectContext) private var viewContext
 
-            .navigationTitle("Characters")
-            .onAppear {
-                Task {
-                    await model.fetchAllCharacters()
-                }
-            }
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \SeriesCharacter.name, ascending: true)],
+        animation: .default)
+    private var characters: FetchedResults<SeriesCharacter>
+
+    @State private var searchText = ""
+    @State private var sortAscending = true
+    @State private var showWithRatingsOnly = false
+    @State private var characterIDs: [Int32] = []
+
+    private func updateCharacterIds(clear: Bool) {
+        if clear == false {
+            let model = RatingModel()
+            let ids =  model.charactersWithRating()
+            characterIDs = ids
+        } else {
+            characterIDs.removeAll()
         }
     }
+    
+    var body: some View {
+        NavigationStack {
+            CharacterFilteredList(filter: searchText, characterIDs: characterIDs, sortAscending: sortAscending)
+            .navigationTitle("Characters")
+            .searchable(text: $searchText, prompt: "Filter characters")
+            .toolbar {
+                Button {
+                    showWithRatingsOnly.toggle()
+                    if showWithRatingsOnly == true {
+                        updateCharacterIds(clear: false)
+                    } else {
+                        updateCharacterIds(clear: true)
+                    }
+                } label: { Image(systemName: showWithRatingsOnly ? "star.fill" : "star") }
 
-    private func elementOnAppear(_ character: Character) {
-        if model.isLastCharacter(character.id) {
-            Task {
-                await model.fetchMoreCharacters()
+                Button {
+                    sortAscending.toggle()
+                } label: { Image(systemName: "arrow.up.arrow.down") }
             }
         }
     }

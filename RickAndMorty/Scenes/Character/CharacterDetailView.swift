@@ -11,7 +11,7 @@ import Kingfisher
 struct CharacterDetailView: View {
 
     @State private var rating = 0
-    let character: Character
+    let character: SeriesCharacter
     
     var body: some View {
         VStack {
@@ -23,7 +23,7 @@ struct CharacterDetailView: View {
                 .ignoresSafeArea(.all)
 
             ScrollView(.vertical) {
-                Text(character.name)
+                Text(character.name ?? "")
                     .font(.largeTitle)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
@@ -31,28 +31,28 @@ struct CharacterDetailView: View {
                 RatingView(rating: $rating)
                 HStack {
                     Text("Species:")
-                    Text(character.species)
+                    Text(character.species ?? "")
                         .font(.subheadline)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
                 HStack {
                     Text("Status:")
-                    Text(character.status.rawValue.capitalized)
+                    Text(character.status!.capitalized)
                         .font(.subheadline)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
                 HStack {
                     Text("Gender:")
-                    Text(character.gender.rawValue.capitalized)
+                    Text(character.gender!.capitalized)
                         .font(.subheadline)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
                 HStack {
                     Text("Origin:")
-                    Text(character.origin.name)
+                    Text((character.toOrigin?.name)!)
                         .font(.subheadline)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -60,20 +60,19 @@ struct CharacterDetailView: View {
                 VStack(alignment: .leading) {
                     HStack {
                         Text("Appears in")
-                        Text("\(character.episode.count) episodes")
+                        Text("\((character.episode?.count)!) episodes")
                             .font(.subheadline)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
-                    EpisodeScrollview(episodes: character.episode)
+                    EpisodeScrollview(urls: character.episode!)
                     HStack(alignment: .top) {
                         Text("Location ")
                             .font(.subheadline)
-                        Text("\(character.location.name)")
+                        Text("\((character.toLocation?.name)!)")
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
-
                 }
             }
 
@@ -81,40 +80,11 @@ struct CharacterDetailView: View {
         .ignoresSafeArea(.all)
         .onAppear {
             let ratingModel = RatingModel()
-            rating = ratingModel.getRating(forCharacterID: character.id)
+            rating = ratingModel.getRating(forCharacterID: Int(character.id))
         }
         .onDisappear {
             let ratingModel = RatingModel()
-            ratingModel.set(rating: rating, forCharacterID: character.id)
-        }
-    }
-}
-
-struct CharacterDetailView_Previews: PreviewProvider {
-
-    static let character = Character(id: 99,
-                                     name: "Nardole",
-                                     status: .alive,
-                                     species: "Almost human",
-                                     type: "Unknown",
-                                     gender: .unknown,
-                                     origin: Origin(name: "Bognor Regis", url: "https://en.wikipedia.org/wiki/Bognor_Regis"), location: CharacterLocation(name: "Milton Keynes", url: "https://en.wikipedia.org/wiki/Milton_Keynes"),
-                                     image: URL(string: "https://ichef.bbci.co.uk/images/ic/1008xn/p04zmzxv.jpg")!,
-                                     episode: [],
-                                     url: URL(string: "https://www.bbc.co.uk/programmes/m0016lkw")!,
-                                     created: Date.now)
-
-    static var previews: some View {
-        CharacterDetailView(character: character)
-    }
-}
-
-struct TinyDetent: CustomPresentationDetent {
-    static func height(in context: Context) -> CGFloat? {
-        if context.dynamicTypeSize.isAccessibilitySize {
-            return 180
-        } else {
-            return 90
+            ratingModel.set(rating: rating, forCharacterID: Int(character.id))
         }
     }
 }

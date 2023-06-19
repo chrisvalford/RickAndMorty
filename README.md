@@ -9,5 +9,5 @@ As the results are downloaded 20 characters at a time the results tend to jump, 
 Plau as the results are not complete, a search facility has not been added.
 
 The feature branch "007_switch_to_coredata" downloads all the records so has search and sort facilities.
-However this branch has a UI issue where the character detail view has the search field showing, which is an error.
-The coredata branch has been created to test the switchover to the new SwiftData framework in iOS17, so shouldn't be considered complete in any way.
+
+The coredata branch has been created to test the switch over to the new <a href="https://developer.apple.com/xcode/swiftdata/" target="_blank">SwiftData</a> framework in iOS17, so shouldn't be considered complete in any way.

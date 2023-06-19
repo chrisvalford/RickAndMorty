@@ -34,7 +34,12 @@ struct RatingView: View {
                 image(for: number)
                     .foregroundColor(number > rating ? offColor : onColor)
                     .onTapGesture {
-                        rating = number
+                        // Remove rating if rating is already 1
+                        if number == 1 && rating == 1 {
+                            rating = 0
+                        } else {
+                            rating = number
+                        }
                     }
             }
         }
@@ -43,7 +48,8 @@ struct RatingView: View {
 
 struct RatingView_Previews: PreviewProvider {
 
+    @State static var rating = 4
     static var previews: some View {
-        RatingView(rating: .constant(4))
+        RatingView(rating: $rating)
     }
 }
