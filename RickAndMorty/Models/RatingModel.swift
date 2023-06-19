@@ -42,6 +42,9 @@ struct RatingModel {
         let request = NSFetchRequest<CharacterRating>(entityName: "CharacterRating")
         do {
             let results = try moc.fetch(request)
+            if results.count < 1 {
+                return []
+            }
             var characterIDs: [Int32] = []
             for result in results {
                 characterIDs.append(result.id)

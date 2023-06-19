@@ -10,7 +10,7 @@
         <attribute name="url" optional="YES" attributeType="String"/>
         <relationship name="toCharacter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SeriesCharacter" inverseName="toOrigin" inverseEntity="SeriesCharacter"/>
     </entity>
-    <entity name="CharacterRating" representedClassName="CharacterRating" syncable="YES" codeGenerationType="class">
+    <entity name="CharacterRating" representedClassName=".CharacterRating" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="rating" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
