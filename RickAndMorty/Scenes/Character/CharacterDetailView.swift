@@ -30,51 +30,21 @@ struct CharacterDetailView: View {
                     .padding(.horizontal)
                     .padding(.top, 8)
                 RatingView(rating: $rating)
-                HStack {
-                    Text("Species:")
-                    Text(character.species ?? "")
-                        .font(.subheadline)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
-                HStack {
-                    Text("Status:")
-                    Text(character.status!.capitalized)
-                        .font(.subheadline)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
-                HStack {
-                    Text("Gender:")
-                    Text(character.gender!.capitalized)
-                        .font(.subheadline)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
-                HStack {
-                    Text("Origin:")
-                    Text((character.toOrigin?.name)!)
-                        .font(.subheadline)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
+                SubheadlineView(title: "Species", content: character.species ?? "")
+                SubheadlineView(title: "Status", content: character.status!.capitalized)
+                SubheadlineView(title: "Gender", content: character.gender!.capitalized)
+                SubheadlineView(title: "Origin", content: character.toOrigin?.name ?? "")
                 VStack(alignment: .leading) {
                     HStack {
                         Text("Appears in")
-                        Text("\((character.episode?.count)!) episodes")
+                        Text("\(character.episode!.count) episode\(character.episode!.count > 1 ? "s" : "")")
                             .font(.subheadline)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
                     EpisodeScrollview(urls: character.episode!)
-                    HStack(alignment: .top) {
-                        Text("Location ")
-                            .font(.subheadline)
-                        Text("\((character.toLocation?.name)!)")
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal)
                 }
+                SubheadlineView(title: "Location", content: character.toLocation?.name ?? "")
             }
 
         }
