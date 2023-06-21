@@ -25,6 +25,7 @@ struct CharacterDetailView: View {
             ScrollView(.vertical) {
                 Text(character.name ?? "")
                     .font(.largeTitle)
+                    .allowsTightening(true)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
                     .padding(.top, 8)
