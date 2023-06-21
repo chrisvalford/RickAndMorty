@@ -12,12 +12,14 @@ struct SubheadlineView: View {
     var content: String
 
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             Text("\(title):")
+                .frame(width: 90, alignment: .leading)
             Text(content)
                 .font(.subheadline)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        //.frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal)
     }
 }

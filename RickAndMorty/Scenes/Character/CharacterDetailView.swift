@@ -34,6 +34,7 @@ struct CharacterDetailView: View {
                 SubheadlineView(title: "Status", content: character.status!.capitalized)
                 SubheadlineView(title: "Gender", content: character.gender!.capitalized)
                 SubheadlineView(title: "Origin", content: character.toOrigin?.name ?? "")
+                SubheadlineView(title: "Location", content: character.toLocation?.name ?? "")
                 VStack(alignment: .leading) {
                     HStack {
                         Text("Appears in")
@@ -44,9 +45,10 @@ struct CharacterDetailView: View {
                     .padding(.horizontal)
                     EpisodeScrollview(urls: character.episode!)
                 }
-                SubheadlineView(title: "Location", content: character.toLocation?.name ?? "")
+                .background(Color.gray.opacity(0.1))
+                .padding(.top, 4)
             }
-
+            .padding(.vertical, -6)
         }
         .ignoresSafeArea(.all)
         .onAppear {
@@ -57,5 +59,6 @@ struct CharacterDetailView: View {
             let ratingModel = RatingModel()
             ratingModel.set(rating: rating, forCharacterID: Int(character.id))
         }
+        Spacer()
     }
 }
