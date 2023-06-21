@@ -43,6 +43,7 @@ struct RatingView: View {
                     }
             }
         }
+        .padding(.bottom, 4)
     }
 }
 

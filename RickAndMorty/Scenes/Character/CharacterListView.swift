@@ -56,6 +56,8 @@ struct CharacterListView: View {
 
 struct CharacterListView_Previews: PreviewProvider {
     static var previews: some View {
-        CharacterListView()
+        Previewing(contextWith: \.seriesCharacters) {
+            CharacterListView()
+        }
     }
 }
