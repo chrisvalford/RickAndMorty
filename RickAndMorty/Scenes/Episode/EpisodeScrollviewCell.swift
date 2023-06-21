@@ -15,6 +15,7 @@ struct EpisodeScrollviewCell: View {
         VStack(alignment: .leading) {
             Text(episode.name!)
                 .font(.headline)
+                .allowsTightening(true)
             Text(episode.airDate!)
                 .font(.subheadline)
             Text(episode.episode!)

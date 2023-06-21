@@ -32,3 +32,11 @@ struct CharacterListCell: View {
         }
     }
 }
+
+struct CharacterListCell_Previews: PreviewProvider {
+    static var previews: some View {
+        Previewing(\.seriesCharacter) { character in
+            CharacterListCell(character: character)
+        }
+    }
+}
