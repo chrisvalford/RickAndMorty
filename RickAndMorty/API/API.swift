@@ -154,6 +154,18 @@ class API {
         }
     }
 
+    func randomCharacter() -> SeriesCharacter {
+        var results: [SeriesCharacter] = []
+        let request = NSFetchRequest<SeriesCharacter>(entityName: "SeriesCharacter")
+        //request.predicate = NSPredicate(format: "id == %i", Int32(10)) //Int.random(in: 1..<42))
+        do {
+            results = try moc.fetch(request)
+            return results[0]
+        } catch {
+            print(error)
+        }
+        return results[0]
+    }
     // MARK: - Episodes
     func fetchEpisode(url: URL) async {
         do {
@@ -170,7 +182,8 @@ class API {
         do {
             let results = try moc.fetch(request)
             for result in results {
-                foundUrls.append(result.url!)
+                guard let url = result.url else { continue }
+                foundUrls.append(url)
             }
         } catch {
             print(error)

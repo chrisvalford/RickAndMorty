@@ -13,12 +13,11 @@ struct EpisodeScrollviewCell: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(episode.name!)
+            Text(episode.name ?? "")
                 .font(.headline)
-                .allowsTightening(true)
-            Text(episode.airDate!)
+            Text(episode.airDate ?? "")
                 .font(.subheadline)
-            Text(episode.episode!)
+            Text(episode.episode ?? "")
                 .font(.subheadline)
         }
     }
